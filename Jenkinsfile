@@ -1,20 +1,13 @@
 pipeline {
     agent any sukh
+  checkout scm
 
-    environment {
-        MYSQL_HOST = 'your_mysql_host'
-        MYSQL_PORT = 'your_mysql_port'
-        MYSQL_DATABASE = 'your_database_name'
-        MYSQL_USER = 'your_mysql_user'
-        MYSQL_PASSWORD = 'your_mysql_password'
-        TABLE_NAME = 'your_table_name'
-    }
 
     stages {
         stage('Checkout') {
             steps {
                 // You may need to customize this based on your version control system
-                checkout scm
+                git credentialsId: 'github-credentials', url: 'git@github.com:sukhdeepsinghh/singla.git'
             }
         }
 
