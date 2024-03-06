@@ -1,5 +1,5 @@
 pipeline {
-    agent anyss
+    agent any
 
     stages {
         stage('Debug') {
