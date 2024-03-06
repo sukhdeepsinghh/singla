@@ -4,7 +4,7 @@ pipeline {
     environment {
         DATABASE_NAME = 'sukhdeep'
         TABLE_NAME = 'customers'
-        TABLE_SCRIPT_FILE = '/home/ubuntu/singla/sukh1.sql'
+        TABLE_SCRIPT_FILE = 'sukh1.sql'
     }
  
 
