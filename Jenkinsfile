@@ -4,7 +4,7 @@ pipeline {
     environment {
         DATABASE_NAME = 'sukhdeep'
         TABLE_NAME = 'customers'
-        TABLE_SCRIPT_FILE = 'create_table.sql'
+        TABLE_SCRIPT_FILE = 'sukh1.sql'
     }
  
 
