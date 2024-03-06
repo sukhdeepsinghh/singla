@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Execute the SQL script using the MySQL client
                     sh """
-                       sudo mysql  -e "${WORKSPACE}/${TABLE_SCRIPT_FILE}"
+                       sudo mysql ${MYSQL_DATABASE}  < \${WORKSPACE}/${TABLE_SCRIPT_FILE}
                     """
                 }
             }
