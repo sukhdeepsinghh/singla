@@ -20,10 +20,10 @@ pipeline {
             steps {
                 script {
       // Copy the SQL script to the workspace
-                    sh "cp ${TABLE_SCRIPT_FILE} \${WORKSPACE}/${TABLE_SCRIPT_FILEE}"
+                    sh "cp ${TABLE_SCRIPT_FILE} \${WORKSPACE}/${TABLE_SCRIPT_FILE}"
                     // Execute the SQL script using the MySQL client
                     sh """
-                       sudo mysql  -e "${TABLE_SCRIPT_FILEE}"
+                       sudo mysql  -e "${TABLE_SCRIPT_FILE}"
                     """
                 }
             }
