@@ -6,6 +6,7 @@ pipeline {
         TABLE_NAME = 'customers'
         TABLE_SCRIPT_FILE = 'create_table.sql'
     }
+ 
 
     stages {
         stage('Checkout') {
