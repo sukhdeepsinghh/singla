@@ -33,7 +33,7 @@ pipeline {
 
                     // Execute the SQL script using the MySQL client
                     sh """
-                        mysql  -e "${createTableScript}"
+                       sudo mysql  -e "${createTableScript}"
                     """
                 }
             }
