@@ -1,23 +1,9 @@
 pipeline {
-    agent { label  "singlaagent" }
-
-    stages {
-        stage('Create a table') {
-            steps {
-                echo "Currenti Directory: ${pwd()}"
-                sh "ls -la"
-            }
-        }
-
-        // Rest of your pipeline...
-    }
-}
-pipeline {
      agent { label  "singlaagent" }
 
     environment {
         DATABASE_NAME = 'sukhdeep'
-        TABLE_NAME = 'students'
+        TABLE_NAME = 'customers'
     }
 
     stages {
@@ -47,7 +33,7 @@ pipeline {
 
                     // Execute the SQL script using the MySQL client
                     sh """
-                        mysql -h  -e "${createTableScript}"
+                        mysql  -e "${createTableScript}"
                     """
                 }
             }
