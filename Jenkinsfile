@@ -19,11 +19,11 @@ pipeline {
         stage('Create Table') {
             steps {
                 script {
-       
-                   //  sh "cp ${TABLE_SCRIPT_FILE} \${WORKSPACE}/${TABLE_SCRIPT_FILE}"
+      // Copy the SQL script to the workspace
+                    sh "cp ${TABLE_SCRIPT_FILE} \${WORKSPACE}/${TABLE_SCRIPT_FILEE}"
                     // Execute the SQL script using the MySQL client
                     sh """
-                       sudo mysql  -e "${TABLE_SCRIPT_FILE}"
+                       sudo mysql  -e "${TABLE_SCRIPT_FILEE}"
                     """
                 }
             }
