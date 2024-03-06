@@ -17,12 +17,10 @@ pipeline {
         stage('Create Table') {
             steps {
                 script {
-                    // Your SQL script to create the table
+                    
                     def createTableScript = """
                         USE $DATABASE_NAME;
-                        CREATE TABLE $TABLE_NAME (
-                            // Define your table columns and data types here
-                            // For example: id INT PRIMARY KEY, name VARCHAR(255), ...
+                        CREATE TABLE $TABLE_NAME(
                             CustomerID INT AUTO_INCREMENT PRIMARY KEY,
                             FirstName VARCHAR(50),
                             LastName VARCHAR(50),
