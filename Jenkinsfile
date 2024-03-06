@@ -29,7 +29,7 @@ pipeline {
                     } else {
                         echo "Creating table 'customers'..."
                         sh """
-                            mysql ${DATABASE_NAME} < \${WORKSPACE}/${TABLE_SCRIPT_FILE}
+                            sudo mysql ${DATABASE_NAME} < \${WORKSPACE}/${TABLE_SCRIPT_FILE}
                         """
                         echo "Table 'customers' created successfully."
                     }
