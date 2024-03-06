@@ -22,9 +22,9 @@ pipeline {
                     // Execute the MySQL script using the MySQL command-line tool
                     def result = sh(script: """
                         sudo mysql  ${DATABASE_NAME} < \${WORKSPACE}/${TABLE_SCRIPT_FILE} | grep -c "customers"
-                    """, returnStatus: false)
+                    """, returnStatus: true)
 
-                    if (result == 0) {
+                    if (result == 1) {
                         echo "Table 'customers' already exists."
                     } else {
                         echo "Creating table 'customers'..."
