@@ -24,7 +24,7 @@ pipeline {
                         sudo mysql  ${DATABASE_NAME} < \${WORKSPACE}/${TABLE_SCRIPT_FILE} | grep -c "customers"
                     """, returnStatus: true)
 
-                    if (result == 1) {
+                    if (result == 0) {
                         echo "Table 'customers' already exists."
                     } else {
                         echo "Creating table 'customers'..."
