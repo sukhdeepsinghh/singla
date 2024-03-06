@@ -4,6 +4,7 @@ pipeline {
     environment {
         DATABASE_NAME = 'sukhdeep'
         TABLE_NAME = 'customers'
+        TABLE_SCRIPT_FILE = 'create_table.sql'
     }
 
     stages {
@@ -17,21 +18,11 @@ pipeline {
         stage('Create Table') {
             steps {
                 script {
-                    
-                    def createTableScript = """
-                        USE $DATABASE_NAME;
-                        CREATE TABLE $TABLE_NAME(
-                            CustomerID INT AUTO_INCREMENT PRIMARY KEY,
-                            FirstName VARCHAR(50),
-                            LastName VARCHAR(50),
-                            Email VARCHAR(100),
-                            Phone VARCHAR(20)
-                        );
-                    """
-
+       
+                    sh "cp ${TABLE_SCRIPT_FILE} \${WORKSPACE}/${TABLE_SCRIPT_FILE}"
                     // Execute the SQL script using the MySQL client
                     sh """
-                       sudo mysql  -e "${createTableScript}"
+                       sudo mysql  -e "${TABLE_SCRIPT_FILE}"
                     """
                 }
             }
