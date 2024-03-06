@@ -19,13 +19,25 @@ pipeline {
         stage('Create Table') {
             steps {
                 script {
-                    // Execute the SQL script using the MySQL client
-                    sh """
-                       sudo mysql ${DATABASE_NAME}  < \${WORKSPACE}/${TABLE_SCRIPT_FILE}
-                    """
+                    // Execute the MySQL script using the MySQL command-line tool
+                    def result = sh(script: """
+                        sudo mysql  ${DATABASE_NAME} < \${WORKSPACE}/${MYSQL_SCRIPT_FILE} | grep -c "customers"
+                    """, returnStatus: true)
+
+                    if (result == 1) {
+                        echo "Table 'customers' already exists."
+                    } else {
+                        echo "Creating table 'customers'..."
+                        sh """
+                            mysql ${DATABASE_NAME} < \${WORKSPACE}/${MYSQL_SCRIPT_FILE}
+                        """
+                        echo "Table 'customers' created successfully."
+                    }
                 }
             }
         }
     }
 }
+
+              
 
