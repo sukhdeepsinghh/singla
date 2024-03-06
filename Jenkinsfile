@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MYSQL_HOST = 'your_mysql_host'
+       a MYSQL_HOST = 'your_mysql_host'
         MYSQL_PORT = 'your_mysql_port'
         MYSQL_DATABASE = 'your_database_name'
         MYSQL_USER = 'your_mysql_user'
