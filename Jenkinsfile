@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any sukh
 
     environment {
         MYSQL_HOST = 'your_mysql_host'
