@@ -5,7 +5,7 @@ pipeline {
         MYSQL_DATABASE = 'sukhdeep'
         SCRIPTS_FOLDER = 'scripts'
         PROCESSED_FOLDER = 'processed'
-        scriptNAME = 'sukh1.sql'
+        SCRIPT_NAME = 'sukh1.sql'
     }
 
     stages {
@@ -28,7 +28,7 @@ pipeline {
 
                         // Check if the table exists
                         def result = sh(script: """
-                            sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} | grep -c "customers"
+                            sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${SCRIPT_NAME} | grep -c "customers"
                         """, returnStatus: true)
 
                         if (result == 0) {
@@ -36,7 +36,7 @@ pipeline {
                         } else {
                             echo "Creating table from script '${scriptName}'..."
                             // Execute the MySQL script
-                            sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}"
+                            sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${SCRIPT_NAME}"
 
                             // Move the processed script to PROCESSED_FOLDER
                             sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
