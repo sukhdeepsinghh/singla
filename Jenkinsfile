@@ -40,7 +40,7 @@ pipeline {
 
                             // Move the processed script to PROCESSED_FOLDER
                             sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                            echo "Table from script '${scriptName}' created successfully."
+                            echo "Table from script '${scriptNAME}' created successfully."
                         }
                     }
                 }
