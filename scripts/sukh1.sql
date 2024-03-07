@@ -1,5 +1,5 @@
 -- create_table.sql
-USE sukhdeep;
+
 
 SELECT table_name
 FROM information_schema.tables
