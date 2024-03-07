@@ -36,7 +36,7 @@ pipeline {
                         } else {
                             echo "Creating table from script '${scriptName}'..."
                             // Execute the MySQL script
-                            sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptNAME}"
+                            sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}"
 
                             // Move the processed script to PROCESSED_FOLDER
                             sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
