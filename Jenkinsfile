@@ -39,8 +39,8 @@ pipeline {
                             sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${SCRIPT_NAME}"
 
                             // Move the processed script to PROCESSED_FOLDER
-                            sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                            echo "Table from script '${scriptNAME}' created successfully."
+                            sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${SCRIPT_NAME} \${WORKSPACE}/${PROCESSED_FOLDER}/"
+                            echo "Table from script '${SCRIPT_NAME}' created successfully."
                         }
                     }
                 }
