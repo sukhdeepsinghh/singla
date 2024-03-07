@@ -5,6 +5,7 @@ pipeline {
         MYSQL_DATABASE = 'sukhdeep'
         SCRIPTS_FOLDER = 'scripts'
         PROCESSED_FOLDER = 'processed'
+        scriptNAME = 'sukh1.sql'
     }
 
     stages {
