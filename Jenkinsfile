@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label  "singlaagent" }
 
     environment {
         MYSQL_DATABASE = 'sukhdeep'
