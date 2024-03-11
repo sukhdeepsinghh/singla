@@ -22,7 +22,7 @@ pipeline {
                     def scripts = sh(script: "ls \${WORKSPACE}/${SCRIPTS_FOLDER}/*.sql", returnStdout: true).trim().split('\n')
 
                     // Iterate through each script
-                      For  (def script in scripts) {
+                      for  (def script in scripts) {
                         // Extract the script name without path
                         def scriptName = script.replaceAll('.*/', '')
 
