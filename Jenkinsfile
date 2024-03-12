@@ -41,6 +41,7 @@ pipeline {
                             sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
 
                             // Move the processed script to PROCESSED_FOLDER on the agent
+                             sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/processedFiles/*"
                             stash includes: "${SCRIPTS_FOLDER}/${scriptName}", name: 'processedFiles'
                         }
                     }
