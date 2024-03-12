@@ -5,7 +5,6 @@ pipeline {
         MYSQL_DATABASE = 'sukhdeep'
         SCRIPTS_FOLDER = 'scripts'
         PROCESSED_FOLDER = 'processed'
-        SCRIPT_NAME = 'sukh1.sql'
     }
 
     stages {
@@ -28,7 +27,7 @@ pipeline {
 
                         // Check if the table exists
                         def result = sh(script: """
-                            sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} | grep -c "customers"
+                            sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} | grep -c ${scriptName}
                         """, returnStatus: true)
 
                         if (result == 0) {
