@@ -5,6 +5,9 @@ pipeline {
         MYSQL_DATABASE = 'sukhdeep'
         SCRIPTS_FOLDER = 'scripts'
         PROCESSED_FOLDER = 'processed'
+        GIT_USERNAME = 'sukhdeepsinghh'
+        GIT_PASSWORD = 'arintech@12345'
+        GIT_REPO_URL = 'https://github.com/sukhdeepsinghh/singla.git'  // Replace with your GitHub repo URL
     }
 
     stages {
@@ -21,7 +24,7 @@ pipeline {
                     def scripts = sh(script: "ls \${WORKSPACE}/${SCRIPTS_FOLDER}/*.sql", returnStdout: true).trim().split('\n')
 
                     // Iterate through each script
-                      for  (def script in scripts) {
+                    for (def script in scripts) {
                         // Extract the script name without path
                         def scriptName = script.replaceAll('.*/', '')
 
@@ -37,12 +40,31 @@ pipeline {
                             // Execute the MySQL script
                             sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
 
-                            // Move the processed script to PROCESSED_FOLDER
-                            sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${ scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                            echo "Table from script '${ scriptName}' created successfully."
+                            // Move the processed script to PROCESSED_FOLDER on the agent
+                            stash includes: "${SCRIPTS_FOLDER}/${scriptName}", name: 'processedFiles'
                         }
                     }
                 }
+            }
+        }
+
+        stage('Move to Processed Folder') {
+            steps {
+                // Unstash the processed scripts on the master node
+                unstash 'processedFiles'
+
+                // Move the processed scripts to PROCESSED_FOLDER on both agent and master
+                sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
+                sh "mv processedFiles/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
+
+                // Commit and push changes to GitHub
+                sh """
+                    git config --global user.email "${GIT_USERNAME}@example.com"
+                    git config --global user.name "${GIT_USERNAME}"
+                    git add \${WORKSPACE}/${PROCESSED_FOLDER}/*
+                    git commit -m "Move processed scripts to ${PROCESSED_FOLDER}"
+                    git push ${GIT_REPO_URL}
+                """
             }
         }
     }
