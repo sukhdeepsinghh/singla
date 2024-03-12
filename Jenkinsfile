@@ -55,7 +55,7 @@ pipeline {
 
                 // Move the processed scripts to PROCESSED_FOLDER on both agent and master
                 sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                sh "mv ${SCRIPTS_FOLDER}/* ${PROCESSED_FOLDER}/"
+                sh "mv processedFiles/* \${PROCESSED_FOLDER}/"
 
                 // Commit and push changes to GitHub
                 sh """
