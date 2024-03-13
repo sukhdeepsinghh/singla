@@ -35,6 +35,7 @@ pipeline {
 
                         if (result == 1) {
                             echo "Table in script '${scriptName}' already exists."
+                            stash includes: "'${WORKSPACE}'/'${SCRIPTS_FOLDER}'/'${scriptName}'", name: 'processedFiles'
                         } else {
                             echo "Creating table from script '${scriptName}'..."
                             // Execute the MySQL script
@@ -48,11 +49,6 @@ pipeline {
                     }
                 }
             }
-        }
-	stage('stash Files') {
-            steps {
-                stash includes: "'${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}'", name: 'processedFiles'
-        }
         }
 
         stage('Move to Processed Folder') {
