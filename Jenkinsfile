@@ -33,7 +33,7 @@ pipeline {
                             sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName} | grep -c ${scriptName}
                         """, returnStatus: true)
 
-                        if (result == 0) {
+                        if (result == 1) {
                             echo "Table in script '${scriptName}' already exists."
                         } else {
                             echo "Creating table from script '${scriptName}'..."
