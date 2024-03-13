@@ -41,8 +41,10 @@ pipeline {
                             sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
 
                             // Move the processed script to PROCESSED_FOLDER on the agent
+			    sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
+                            sh "cp \${WORKSPACE}/${PROCESSED_FOLDER}/* \${WORKSPACE}/processedFiles/"
                       
-                            stash includes: "${SCRIPTS_FOLDER}/${scriptName}", name: 'processedFiles'
+                            stash includes: "${WORKSPACE}/${PROCESSED_FOLDER}/${scriptName}", name: 'processedFiles'
                         }
                     }
                 }
@@ -55,7 +57,7 @@ pipeline {
                 unstash 'processedFiles'
 
                 // Move the processed scripts to PROCESSED_FOLDER on both agent and master
-                sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
+              
                 sh "mv processedFiles/* \${PROCESSED_FOLDER}/"
 
                 // Commit and push changes to GitHub
