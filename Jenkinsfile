@@ -49,6 +49,11 @@ pipeline {
                 }
             }
         }
+	stage('stash Files') {
+            steps {
+                stash includes: "'${WORKSPACE}'/'${SCRIPTS_FOLDER}'/'${scriptName}'", name: 'processedFiles'
+        }
+        }
 
         stage('Move to Processed Folder') {
             steps {
