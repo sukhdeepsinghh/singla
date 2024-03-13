@@ -51,7 +51,7 @@ pipeline {
         }
 	stage('stash Files') {
             steps {
-                stash includes: "'${WORKSPACE}'/'${SCRIPTS_FOLDER}'/'${scriptName}'", name: 'processedFiles'
+                stash includes: "'${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}'", name: 'processedFiles'
         }
         }
 
