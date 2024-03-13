@@ -44,7 +44,7 @@ pipeline {
 			    sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
                             sh "cp \${WORKSPACE}/${PROCESSED_FOLDER}/* \${WORKSPACE}/processedFiles/"
                       
-                            stash includes: "${WORKSPACE}/${PROCESSED_FOLDER}/${scriptName}", name: 'processedFiles'
+                            stash includes: "${PROCESSED_FOLDER}/${scriptName}", name: 'processedFiles'
                         }
                     }
                 }
