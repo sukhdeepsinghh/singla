@@ -61,7 +61,7 @@ pipeline {
 
                 sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
                 sh "cp \${WORKSPACE}/${PROCESSED_FOLDER}/* \${WORKSPACE}/processedFiles"
-              //  sh "mv processedFiles/* \${PROCESSED_FOLDER}/"
+                sh "mv processedFiles/* \${PROCESSED_FOLDER}/"
 
 
                 // Commit and push changes to GitHub
