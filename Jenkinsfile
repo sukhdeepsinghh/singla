@@ -67,7 +67,7 @@ pipeline {
         }
         stage('Move to harman Folder') {
             steps {
-      
+             unstash 'processedFiles'      
              sh "mv processedFiles/* harman"
     }
   }
