@@ -60,7 +60,7 @@ pipeline {
                 // Move the processed scripts to PROCESSED_FOLDER on both agent and master
 
                 sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                sh "mv \${WORKSPACE}/${PROCESSED_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
+                sh "cp \${WORKSPACE}/${PROCESSED_FOLDER}/* \${WORKSPACE}/processedFiles"
               //  sh "mv processedFiles/* \${PROCESSED_FOLDER}/"
 
 
