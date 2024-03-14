@@ -60,7 +60,7 @@ pipeline {
 		    git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/sukhdeepsinghh/singla.git HEAD:master
                     """
                     //git push ${GIT_REPO_URL} HEAD:master
-                """
+               
   }
   }
 
