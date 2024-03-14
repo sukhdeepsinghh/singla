@@ -24,7 +24,7 @@ pipeline {
                     def scripts = sh(script: "ls \${WORKSPACE}/${SCRIPTS_FOLDER}/*.sql", returnStdout: true).trim().split('\n')
 
                     // Iterate through each script
-                    for (def script in scripts) {
+                      for  (def script in scripts) {
                         // Extract the script name without path
                         def scriptName = script.replaceAll('.*/', '')
 
@@ -35,35 +35,22 @@ pipeline {
 
                         if (result == 1) {
                             echo "Table in script '${scriptName}' already exists."
-                            stash includes: "${SCRIPTS_FOLDER}/${scriptName}", name: 'processedFiles'
                         } else {
                             echo "Creating table from script '${scriptName}'..."
                             // Execute the MySQL script
                             sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
-            sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
 
-                            // Move the processed script to PROCESSED_FOLDER on the agent
-  // Move the processed script to PROCESSED_FOLDER on the agent
-
-                            stash includes: "${SCRIPTS_FOLDER}/${scriptName}", name: 'processedFiles'
+                            // Move the processed script to PROCESSED_FOLDER
+                            sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${ scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
+                            echo "Table from script '${ scriptName}' created successfully."
                         }
                     }
                 }
             }
         }
-
-        stage('Move to Processed Folder') {
+      stage('Run MySQL Scripts') {
             steps {
-                // Unstash the processed scripts on the master node
-                unstash 'processedFiles'
-
-                // Move the processed scripts to PROCESSED_FOLDER on both agent and master
-
-                sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                sh "cp \${WORKSPACE}/${PROCESSED_FOLDER}/* \${WORKSPACE}/processedFiles"
-                sh "mv processedFiles/* harman"
-
-
+              
                 // Commit and push changes to GitHub
                 sh """
                     git config --global user.email "${GIT_USERNAME}@example.com"
@@ -72,13 +59,9 @@ pipeline {
                     git commit -m "Move processed scripts to ${PROCESSED_FOLDER}"
                     git push ${GIT_REPO_URL}
                 """
-            }
-        }
+  }
+  }
+
     }
 }
-
-
-
-
-
 
