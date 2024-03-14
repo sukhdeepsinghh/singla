@@ -40,11 +40,12 @@ pipeline {
                             echo "Creating table from script '${scriptName}'..."
                             // Execute the MySQL script
                             sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
+            sh "sudo mysql ${MYSQL_DATABASE} < \${WORKSPACE}/${SCRIPTS_FOLDER}/${scriptName}"
 
                             // Move the processed script to PROCESSED_FOLDER on the agent
   // Move the processed script to PROCESSED_FOLDER on the agent
 
-                            
+                            stash includes: "${SCRIPTS_FOLDER}/${scriptName}", name: 'processedFiles'
                         }
                     }
                 }
@@ -53,31 +54,27 @@ pipeline {
 
         stage('Move to Processed Folder') {
             steps {
-               
+                // Unstash the processed scripts on the master node
+                unstash 'processedFiles'
 
                 // Move the processed scripts to PROCESSED_FOLDER on both agent and master
-    
-                sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
-             
-                 // Stash the processed scripts on the agent
-                stash includes: "${PROCESSED_FOLDER}/*", name: 'processedFiles'
 
-           
+                sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/* \${WORKSPACE}/${PROCESSED_FOLDER}/"
+              //  sh "mv processedFiles/* harman"
+
+
+                // Commit and push changes to GitHub
+                sh """
+                    git config --global user.email "${GIT_USERNAME}@example.com"
+                    git config --global user.name "${GIT_USERNAME}"
+                    git add \${WORKSPACE}/${PROCESSED_FOLDER}/*
+                    git commit -m "Move processed scripts to ${PROCESSED_FOLDER}"
+                    git push ${GIT_REPO_URL}
+                """
             }
         }
-        stage('Move to harman Folder') {
-            steps {
-             unstash 'processedFiles'      
-             sh "mv processedFiles/* harman"
     }
-  }
- }
 }
-
- 
-
-
-
 
 
 
