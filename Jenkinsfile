@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-      stage('Run MySQL Scripts') {
+      stage('Push code to github') {
             steps {
               
                 // Commit and push changes to GitHub
