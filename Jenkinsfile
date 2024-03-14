@@ -61,7 +61,7 @@ pipeline {
                     git config --global user.name "${GIT_USERNAME}"
                     git add \${WORKSPACE} .
                     git commit -m "Move processed scripts to github"
-		    git push . https://$GIT_USERNAME:$GIT_PASSWORD@github.com/sukhdeepsinghh/singla.git HEAD:refs/heads/master
+		    git push  https://$GIT_USERNAME:$GIT_PASSWORD@github.com/sukhdeepsinghh/singla.git HEAD:refs/heads/master
                     """
                     //git push ${GIT_REPO_URL} HEAD:dev
                     // git push . HEAD:refs/heads/main
