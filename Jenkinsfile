@@ -65,7 +65,7 @@ pipeline {
            
             }
         }
-        stage('Move to Processed Folder') {
+        stage('Move to harman Folder') {
             steps {
              sh "mv processedFiles/* \${PROCESSED_FOLDER}/"
              sh "mv processedFiles/* harman"
