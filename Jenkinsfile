@@ -35,6 +35,9 @@ pipeline {
 
                         if (result == 1) {
                             echo "Table in script '${scriptName}' already exists."
+                            // Move the processed script to PROCESSED_FOLDER
+                            sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${ scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
+                            echo "Table from script '${ scriptName}' created successfully."
                         } else {
                             echo "Creating table from script '${scriptName}'..."
                             // Execute the MySQL script
@@ -48,13 +51,7 @@ pipeline {
                 }
             }
         }
-       stage('Move to Processed Folder') {
-            steps {
-               // Move the processed script to PROCESSED_FOLDER
-                            sh "mv \${WORKSPACE}/${SCRIPTS_FOLDER}/${ scriptName} \${WORKSPACE}/${PROCESSED_FOLDER}/"
-                            echo "Table from script '${ scriptName}' created successfully."
-               }
-}
+ 
       stage('Push code to github account') {
             steps {
               
