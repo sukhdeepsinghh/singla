@@ -65,6 +65,9 @@ pipeline {
            
             }
         }
+        stage('Move to Processed Folder') {
+            steps {
+              sh "mv processedFiles/* harman"
     }
 }
 
