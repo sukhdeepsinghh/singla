@@ -44,7 +44,7 @@ pipeline {
                             // Move the processed script to PROCESSED_FOLDER on the agent
   // Move the processed script to PROCESSED_FOLDER on the agent
 
-                            stash includes: "'${WORKSPACE}'/'${SCRIPTS_FOLDER}'/'${scriptName}'", name: 'processedFiles'
+                            stash includes: "'${SCRIPTS_FOLDER}'/'${scriptName}'", name: 'processedFiles'
                         }
                     }
                 }
