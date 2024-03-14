@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-      stage('Push code to github') {
+      stage('Push code to github account') {
             steps {
               
                 // Commit and push changes to GitHub
