@@ -69,8 +69,8 @@ pipeline {
             steps {
               sh "mv processedFiles/* harman"
     }
-}
-}
+  }
+ }
 }
 
  
