@@ -52,23 +52,7 @@ pipeline {
                 }
             }
         }
- 
-      stage('Push code to github account') {
-            steps {
-              
-                // Commit and push changes to GitHub
 
-             sh """
-	     ssh-add ~/.ssh/sukhdeep
-    	     eval $(${WORKSPACE}/scripts)
-    	     git add ${WORKSPACE} .
-             git commit -m 'Move processed scripts to github'
-             git push origin master
-             """
-
-               
-  }
-  }
 
     }
 }
