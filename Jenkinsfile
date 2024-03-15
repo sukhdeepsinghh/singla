@@ -54,7 +54,7 @@ pipeline {
         }
      stage('Push code to GitHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'gitpush', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                     script {
                         sh """
                             git config --global user.email "${GIT_USERNAME}@example.com"
