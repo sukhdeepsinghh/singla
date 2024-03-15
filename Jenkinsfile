@@ -57,8 +57,7 @@ pipeline {
             steps {
               
                 // Commit and push changes to GitHub
-                sh """
-         
+                sh """ 
 		    ssh-add ~/.ssh/sukhdeep
 		    eval $(ssh-agent)
                     git add \${WORKSPACE} .
