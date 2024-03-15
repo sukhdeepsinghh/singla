@@ -52,7 +52,21 @@ pipeline {
                 }
             }
         }
-
+     stage('Push code to GitHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    script {
+                        sh """
+                            git config --global user.email "${GIT_USERNAME}@example.com"
+                            git config --global user.name "${GIT_USERNAME}"
+                            git add .
+                            git commit -m "Commit message"
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sukhdeepsinghh/singla.git
+                        """
+                    }
+                }
+            }
+        }
 
     }
 }
