@@ -57,15 +57,15 @@ pipeline {
             steps {
               
                 // Commit and push changes to GitHub
-                sh """ 
-		    ssh-add ~/.ssh/sukhdeep
-		    eval $(ssh-agent)
-                    git add \${WORKSPACE} .
-                    git commit -m "Move processed scripts to github"
-		    git push origin master 
-                    """
-                    //git push ${GIT_REPO_URL} HEAD:dev
-                    // git push . HEAD:refs/heads/main
+
+             sh """
+	     ssh-add ~/.ssh/sukhdeep
+    	     eval $(${WORKSPACE}/scripts)
+    	     git add ${WORKSPACE} .
+             git commit -m 'Move processed scripts to github'
+             git push origin master
+             """
+
                
   }
   }
