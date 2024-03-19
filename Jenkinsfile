@@ -56,7 +56,7 @@ pipeline {
     steps {
         script {
             sh '''
-                git switch -b dev
+                git switch dev
                 eval $(ssh-agent)
                 ssh-add ~/.ssh/sukhdeep  # Corrected path to SSH key
                 git add .
