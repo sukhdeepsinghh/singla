@@ -54,14 +54,16 @@ pipeline {
         }
      stage('Push code to GitHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'gitpush', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                     script {
                         sh """
+                            eval $(ssh-agent)
+                            ssh-add ~/.sss/sukhdeep
+                            git checkout -b dev
                             git config --global user.email "${GIT_USERNAME}@example.com"
                             git config --global user.name "${GIT_USERNAME}"
                             git add .
                             git commit -m "Commit message"
-                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/sukhdeepsinghh/singla.git
+                            git push origin dev
                         """
                     }
                 }
