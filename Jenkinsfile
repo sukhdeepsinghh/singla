@@ -54,7 +54,7 @@ pipeline {
         }
      stage('Push code to GitHub') {
             steps {
-                    script {
+                 script {
                         sh """
                             eval $(ssh-agent)
                             ssh-add ~/.sss/sukhdeep
@@ -68,7 +68,7 @@ pipeline {
                     }
                 }
             }
-        }
+
 
     }
 }
