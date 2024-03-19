@@ -53,21 +53,18 @@ pipeline {
             }
         }
      stage('Push code to GitHub') {
-            steps {
-                 script {
-                        sh """
-                            eval $(ssh-agent)
-                            ssh-add ~/.sss/sukhdeep
-                            git checkout -b dev
-                            git config --global user.email "${GIT_USERNAME}@example.com"
-                            git config --global user.name "${GIT_USERNAME}"
-                            git add .
-                            git commit -m "Commit message"
-                            git push origin dev
-                        """
-                    }
-                }
-          }
+    steps {
+        script {
+            sh '''
+                eval $(ssh-agent)
+                ssh-add ~/.ssh/sukhdeep  # Corrected path to SSH key
+                git add .
+                git commit -m "Commit message"
+                git push origin dev  # Ensure the correct branch name and remote repository
+            '''
+        }
     }
+}
+}
 }
 
